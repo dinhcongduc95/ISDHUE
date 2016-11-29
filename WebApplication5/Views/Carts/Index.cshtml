@@ -1,0 +1,105 @@
+﻿@model PagedList.IPagedList<WebApplication5.Models.Product>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2 class="center">Index</h2>
+
+<!-- Page Content -->
+<div class="container" style="margin-top: 71px;">
+    <!-- Heading Row -->
+    <div class="row">
+        <div class="col-md-8">
+            <img class="img-responsive img-rounded" src="http://placehold.it/900x350" alt="">
+        </div>
+        <!-- /.col-md-8 -->
+        <div class="col-md-4">
+            <h1>Your Cart Item Are Here</h1>
+            <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to it, but it makes a great use of the standard Bootstrap core components. Feel free to use this template for any project you want!</p>
+            <a class="btn btn-primary btn-lg" href="#">Call to Action!</a>
+        </div>
+        <!-- /.col-md-4 -->
+    </div>
+    <!-- /.row -->
+    <hr>
+
+    <!-- Call to Action Well -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="well text-center">
+                This is a well that is a great spot for a business tagline or phone number for easy access!
+            </div>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+
+    @using (Html.BeginForm("Index", "UserProducts", FormMethod.Get))
+    {
+        <p>
+            Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Search" />
+        </p>
+    }
+
+
+    <h3>Sort By:</h3>
+    @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+    /
+    @Html.ActionLink("Create Date", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+
+
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-md-12">
+            @foreach (var item in Model)
+            {
+
+                <div class="col-md-4">
+                    <h2>@Html.DisplayFor(modelItem => item.Name)</h2>
+
+                    <img src="~/Content/images/@Html.Raw(item.ImageLink)" style="height: auto; width: 280px" />
+                    <p>
+                        Category: @Html.DisplayFor(modelItem => item.Category.Code)
+                    </p>
+                    <p>
+                        Title: @Html.DisplayFor(modelItem => item.Document.Title)
+                    </p>
+                    <p>
+                        Description: @Html.DisplayFor(modelItem => item.Description)
+                    </p>
+                    <p>
+                        Price: @Html.DisplayFor(modelItem => item.Price)
+                    </p>
+                    <p>
+                        Origin: @Html.DisplayFor(modelItem => item.Origin)
+                    </p>
+                    <p>
+                        Added Date: @Html.DisplayFor(modelItem => item.CreateDate)
+                    </p>
+                    <a class="btn btn-default" href="#">More Info</a>
+                </div>
+            }
+        </div>
+    </div>
+    <br />
+    <div class="row" style="text-align: center;">
+        <div class="col-md-12">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+                new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+    </div>
+
+    <div class="row" style="text-align: center;">
+        <div class="col-md-12">
+            
+            <button class="btn btn-success btn-lg">@Html.ActionLink("Check Out Ngay", "CreatePayment", "Payments")</button>
+        </div>
+    </div>
+</div>
+
