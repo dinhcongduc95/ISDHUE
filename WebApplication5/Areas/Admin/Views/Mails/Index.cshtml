@@ -5,15 +5,12 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="center">Index</h2>
+<h2 class="center light">Quản lí bản ghi Mail</h2>
 
-<p>
-    
-</p>
 <div class="container"><div class="row card-panel hoverable">@Html.ActionLink("Create New", "Create", null, new { @class = "waves-effect waves-light btn" })<table class="highlight striped responsive-table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            @Html.DisplayNameFor(model => model.User.Email)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -25,7 +22,7 @@
             @Html.DisplayNameFor(model => model.MailContent)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateCreated)
+            @Html.DisplayNameFor(model => model.CreateDate)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsSent)
@@ -36,7 +33,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+            @Html.DisplayFor(modelItem => item.User.Email)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Title)
@@ -48,7 +45,7 @@
             @Html.DisplayFor(modelItem => item.MailContent)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DateCreated)
+            @Html.DisplayFor(modelItem => item.CreateDate)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsSent)

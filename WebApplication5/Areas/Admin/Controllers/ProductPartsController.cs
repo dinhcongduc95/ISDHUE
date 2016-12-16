@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using WebApplication5.Models;
 
 namespace WebApplication5.Areas.Admin.Controllers
@@ -13,12 +12,21 @@ namespace WebApplication5.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public class ProductPartsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin/ProductParts
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-            var productParts = db.ProductParts.Include(p => p.Part).Include(p => p.Product);
+            ViewBag.ProductId = id;
+            var productParts = from product in db.Products
+                join
+                    productPart in db.ProductParts on product.Id equals productPart.ProductIdRef
+                join
+                    part in db.Parts on productPart.PartIdRef equals part.Id
+                where product.Id == id
+                select part;
+            ViewBag.ProductPartAvails = db.Parts.ToList().Except(productParts);
+
             return View(productParts.ToList());
         }
 
@@ -29,7 +37,7 @@ namespace WebApplication5.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductPart productPart = db.ProductParts.Find(id);
+            var productPart = db.ProductParts.Find(id);
             if (productPart == null)
             {
                 return HttpNotFound();
@@ -38,10 +46,10 @@ namespace WebApplication5.Areas.Admin.Controllers
         }
 
         // GET: Admin/ProductParts/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            ViewBag.PartIdRef = new SelectList(db.Parts, "Id", "Name");
-            ViewBag.Product_Id = new SelectList(db.Products, "Id", "Name");
+            ViewBag.ProductId = id;
+            ViewBag.DocumentIdRef = new SelectList(db.Documents, "Id", "Title");
             return View();
         }
 
@@ -50,18 +58,36 @@ namespace WebApplication5.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,PartIdRef,Product_Id")] ProductPart productPart)
+        public ActionResult Create(
+            [Bind(Include = "Id,Name,Description,Origin,Manufacturer,CreateDate,DocumentIdRef,ImageLink,ProductId")] Part part)
         {
             if (ModelState.IsValid)
             {
+                var productId = int.Parse(Request.Form["ProductId"]);
+
+                part.Id = 1;
+                var parts = db.Parts.OrderBy(m => m.Id);
+                if (parts.Any())
+                {
+                    part.Id = parts.ToList().Last().Id + 1;
+                }
+
+                part.CreateDate = DateTime.Now.ToShortDateString();
+                db.Parts.Add(part);
+
+                var productPart = new ProductPart
+                {
+                    PartIdRef = part.Id,
+                    ProductIdRef = productId
+                };
+
                 db.ProductParts.Add(productPart);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new {id = productId});
             }
 
-            ViewBag.PartIdRef = new SelectList(db.Parts, "Id", "Name", productPart.PartIdRef);
-            ViewBag.Product_Id = new SelectList(db.Products, "Id", "Name", productPart.Product_Id);
-            return View(productPart);
+            ViewBag.DocumentIdRef = new SelectList(db.Documents, "Id", "Title");
+            return View(part);
         }
 
         // GET: Admin/ProductParts/Edit/5
@@ -71,13 +97,13 @@ namespace WebApplication5.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductPart productPart = db.ProductParts.Find(id);
+            var productPart = db.ProductParts.Find(id);
             if (productPart == null)
             {
                 return HttpNotFound();
             }
             ViewBag.PartIdRef = new SelectList(db.Parts, "Id", "Name", productPart.PartIdRef);
-            ViewBag.Product_Id = new SelectList(db.Products, "Id", "Name", productPart.Product_Id);
+            ViewBag.Product_Id = new SelectList(db.Products, "Id", "Name", productPart.ProductIdRef);
             return View(productPart);
         }
 
@@ -95,7 +121,7 @@ namespace WebApplication5.Areas.Admin.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.PartIdRef = new SelectList(db.Parts, "Id", "Name", productPart.PartIdRef);
-            ViewBag.Product_Id = new SelectList(db.Products, "Id", "Name", productPart.Product_Id);
+            ViewBag.Product_Id = new SelectList(db.Products, "Id", "Name", productPart.ProductIdRef);
             return View(productPart);
         }
 
@@ -106,7 +132,7 @@ namespace WebApplication5.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProductPart productPart = db.ProductParts.Find(id);
+            var productPart = db.ProductParts.Find(id);
             if (productPart == null)
             {
                 return HttpNotFound();
@@ -119,10 +145,57 @@ namespace WebApplication5.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ProductPart productPart = db.ProductParts.Find(id);
+            var productPart = db.ProductParts.Find(id);
             db.ProductParts.Remove(productPart);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Products");
+        }
+
+
+        public JsonResult AddPartAjax()
+        {            
+                        
+            if (string.IsNullOrEmpty(Request.Form["addedParts[]"]))
+            {
+                return null;
+            }
+            int productId = int.Parse(Request.Form["productId"]);
+            string[] splitedParts = Request.Form["addedParts[]"].Split(',');          
+
+            foreach (var partStr in splitedParts)
+            {                
+                var partId = int.Parse(partStr.Split('_')[1]);
+                db.ProductParts.Add(new ProductPart
+                {
+                    PartIdRef = partId,
+                    ProductIdRef = productId
+                });
+            }
+            db.SaveChanges();
+
+            return Json(new {msg = "done"});
+        }
+
+        public JsonResult DeletePartAjax()
+        {
+
+            if (string.IsNullOrEmpty(Request.Form["deleteParts[]"]))
+            {
+                return null;
+            }
+            int productId = int.Parse(Request.Form["productId"]);
+            string[] splitedParts = Request.Form["deleteParts[]"].Split(',');
+
+            foreach (var partStr in splitedParts)
+            {
+                var partId = int.Parse(partStr.Split('_')[1]);
+                var partProduct =
+                    db.ProductParts.SingleOrDefault(m => m.PartIdRef == partId && m.ProductIdRef == productId);
+                db.ProductParts.Remove(partProduct);
+            }
+            db.SaveChanges();
+
+            return Json(new { msg = "done" });
         }
 
         protected override void Dispose(bool disposing)

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -45,10 +46,11 @@ namespace WebApplication5.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Origin,Manufacturer,CreateDate,DocumentIdRef")] Part part)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Origin,Manufacturer,CreateDate,DocumentIdRef,ImageLink")] Part part)
         {
             if (ModelState.IsValid)
             {
+                part.CreateDate = DateTime.Now.ToShortDateString();
                 db.Parts.Add(part);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -79,10 +81,10 @@ namespace WebApplication5.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,Origin,Manufacturer,CreateDate,DocumentIdRef")] Part part)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,Origin,Manufacturer,CreateDate,DocumentIdRef,ImageLink")] Part part)
         {
             if (ModelState.IsValid)
-            {
+            {                
                 db.Entry(part).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

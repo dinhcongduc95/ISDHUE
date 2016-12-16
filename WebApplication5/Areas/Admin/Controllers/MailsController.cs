@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -30,6 +31,7 @@ namespace WebApplication5.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            mail.User = db.Users.Find(mail.UserIdRef);
             return View(mail);
         }
 
@@ -45,10 +47,12 @@ namespace WebApplication5.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserIdRef,Title,Description,MailContent,DateCreated,IsSent")] Mail mail)
+        public ActionResult Create([Bind(Include = "Id,UserIdRef,Title,Description,MailContent,CreateDate,IsSent")] Mail mail)
         {
             if (ModelState.IsValid)
             {
+                mail.CreateDate = DateTime.Now.ToShortDateString();
+                mail.User = db.Users.Find(mail.UserIdRef);
                 db.Mails.Add(mail);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -79,10 +83,11 @@ namespace WebApplication5.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserIdRef,Title,Description,MailContent,DateCreated,IsSent")] Mail mail)
+        public ActionResult Edit([Bind(Include = "Id,UserIdRef,Title,Description,MailContent,CreateDate,IsSent")] Mail mail)
         {
             if (ModelState.IsValid)
             {
+                mail.User = db.Users.Find(mail.UserIdRef);
                 db.Entry(mail).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -103,6 +108,7 @@ namespace WebApplication5.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            mail.User = db.Users.Find(mail.UserIdRef);
             return View(mail);
         }
 

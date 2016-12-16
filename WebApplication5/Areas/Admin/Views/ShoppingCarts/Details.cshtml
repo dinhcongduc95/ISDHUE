@@ -5,39 +5,43 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="container">
+    <h4 class="center light">Chi tiết giỏ hàng: @Model.Id</h4>
 
-<div>
-    <h4 class="center">ShoppingCart</h4>
-    
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
-        </dt>
+    <div class="row card-panel hoverable">       
 
-        <dd>
-            @Html.DisplayFor(model => model.AspNetUser.Email)
-        </dd>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.User.Email)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.User.Email)
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Name)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Name)
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.CreateDate)
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </dt>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreateDate)
-        </dd>
+    <div class="row card-panel hoverable center">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "waves-effect waves-light btn" })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "waves-effect waves-light btn" })
+    </div>
 
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index", null, new { @class= "waves-effect waves-light btn" })
-</p>

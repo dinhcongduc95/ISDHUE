@@ -42,9 +42,7 @@
                 </div>
 
             </div>
-            <div class="card-action">
-                <a class="waves-effect waves-light btn" href="#">Gọi ngay cho chúng tôi</a>
-            </div>
+            
         </div>
     </div>
 </div>
@@ -64,7 +62,7 @@
                                 <div class="card">
                                     <div class="card-image">
                                         
-                                        <img class="responsive-img" style="height: 300px" src="~/Content/images/@Html.Raw(item.ImageLink)"/>
+                                        <img class="responsive-img" style="height: 300px" src="../..@Url.Content(item.ImageLink)"/>
                                         <h2 class="card-title">
                                             @Html.DisplayFor(modelItem => item.Name)
                                         </h2>

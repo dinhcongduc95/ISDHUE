@@ -2,21 +2,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
     <title>@ViewBag.Title - My ASP.NET Application</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="@Url.Content("~/Content/materialize/css/materialize.css")" type="text/css" rel="stylesheet" media="screen,projection" />
-    <link href="@Url.Content("~/Content/materialize/css/style.css")" type="text/css" rel="stylesheet" media="screen,projection" />
-    <link href="@Url.Content("~/Content/JQueryUI/themes/base/jquery.ui.all.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/materialize/css/materialize.css")" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="@Url.Content("~/Content/materialize/css/style.css")" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="@Url.Content("~/Content/JQueryUI/themes/base/jquery.ui.all.css")" rel="stylesheet"/>
     <link href="/Content/ChatStyle.css" rel="stylesheet"/>
 
     @*<link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />*@
-    <link href="@Url.Content("~/Content/PagedList.css")" rel="stylesheet" />
-    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/PagedList.css")" rel="stylesheet"/>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet"/>
     <script src="@Url.Content("~/Scripts/jquery-1.10.2.js")"></script>
     <script src="@Url.Content("~/Content/vendor/bootstrap/js/bootstrap.js")"></script>
-    <link href="@Url.Content("~/Content/vendor/font-awesome/css/font-awesome.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Content/vendor/font-awesome/css/font-awesome.css")" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <script src="/Scripts/ui/jquery.ui.core.js"></script>
@@ -28,14 +28,14 @@
 <body>
 <div class="navbar-fixed">
     <nav class="white" role="navigation">
-        <a href="#" data-activates="nav-mobile" class="button-collapse waves-effect waves-light btn show-on-large white-text left"><i class="material-icons left">menu</i>menu</a>
+        <a href="#" data-activates="nav-mobile" class="button-collapse waves-effect waves-light btn brown show-on-large white-text left"><i class="material-icons left">menu</i>menu</a>
         <ul class="right hide-on-med-and-down">
             <li class="right">@Html.Partial("_LoginPartial")</li>
         </ul>
         <div class="nav-wrapper container">
 
             <ul id="nav-mobile" class="side-nav">
-                @if (Request.IsAuthenticated)
+                @*@if (Request.IsAuthenticated)
                 {                    
                         @Html.AntiForgeryToken()
                     <li>
@@ -46,11 +46,11 @@
                     </li>
                     <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
                     
-                }
+                }*@
                 <li>@Html.ActionLink("Products", "Index", "Products")</li>
                 <li>@Html.ActionLink("Cartegories", "Index", "Categories")</li>
                 <li>@Html.ActionLink("Parts", "Index", "Parts")</li>
-                <li>@Html.ActionLink("Payments", "Index", "Home")</li>
+                <li>@Html.ActionLink("Payments", "Index", "Payments")</li>
                 <li>@Html.ActionLink("Documents", "Index", "Documents")</li>
                 <li>@Html.ActionLink("Shippings", "Index", "Shippings")</li>
                 <li>@Html.ActionLink("Locations", "Index", "Locations")</li>
@@ -59,99 +59,126 @@
                 <li>@Html.ActionLink("Mails", "Index", "Mails")</li>
 
             </ul>
-            
+
 
         </div>
     </nav>
 </div>
-        
 
-        @RenderBody()
-    <div class="fixed-action-btn horizontal">
-        <a class="btn-floating btn-large red" id="chatBtn">
-            <i class="large material-icons">mode_edit</i>
-        </a>
+
+@RenderBody()
+<div class="fixed-action-btn horizontal">
+    <a class="btn-floating btn-large red" id="chatBtn">
+        <i class="large material-icons">mode_edit</i>
+    </a>
+</div>
+
+<div style="position: fixed; bottom: 0; right: 1%; display: none" id="chatDiv">
+    <div id="divContainer">
+        <div id="divLogin" class="login">
+            <div>
+                Tên của bạn:<br/>
+                <input id="txtNickName" type="text" class="textBox"/>
+            </div>
+            <div id="divButton" class="row">
+                <div class="col l6">
+                    <input id="btnStartChat" type="button" class="waves-effect waves-light btn" value="Chat" />
+                </div>
+                <div class="col l6">
+                    <a class="waves-effect waves-light btn">Thoát</a>
+                </div>                                
+            </div>
+        </div>
+
+        <div id="divChat" class="chatRoom">
+            <div class="title">
+                Chào Admin: [<span id="spanUser"></span>]
+                <i class="material-icons right hoverable" id="closeBtn" style="cursor: pointer">done</i>
+            </div>
+            <div class="content">
+                <div id="divusers" class="users">
+                </div>
+            </div>
+        </div>
+
+        <input id="hdId" type="hidden"/>
+        <input id="hdUserName"
+               type="hidden"/>
+        <input id="hdRole" value="Admin"
+               type="hidden"/>
     </div>
+</div>
+<script>
+    $('#chatBtn')
+        .click(function() {
+            $(this).hide();
+            $('#chatDiv').show();
+        });
+    $('#closeBtn').click(function() {
+        $('#chatBtn').show();
+        $('#chatDiv').hide();
+    });
+   
+</script>
+<footer class="page-footer brown darken-2">
+    <div class="container">
+        <div class="row">
+            <div class="col l6 s12">
+                <h5 class="white-text">Company Bio</h5>
+                <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
 
-    <div style="position: fixed; bottom: 0; right: 1%; display: none" id="chatDiv">
-        <div id="divContainer">
-            <div id="divLogin" class="login">
-                <div>
-                    Tên của bạn:<br />
-                    <input id="txtNickName" type="text" class="textBox" />
-                </div>
-                <div id="divButton">
-                    <input id="btnStartChat" type="button" class="submitButton" value="Bắt đầu chat" />
-                </div>
             </div>
-
-            <div id="divChat" class="chatRoom">
-                <div class="title">
-                    Chào Admin: [<span id='spanUser'></span>]
-                    <i class="material-icons">done</i>
-                </div>
-                <div class="content">                    
-                    <div id="divusers" class="users">
-                    </div>
-                </div>                
+            <div class="col l3 s12">
+                <h5 class="white-text">Đối tác vàng</h5>
+                <ul>
+                    <li>
+                        <a class="white-text" href="#!">Đối tác 1</a>
+                    </li>
+                    <li>
+                        <a class="white-text" href="#!">Đối tác 2</a>
+                    </li>
+                    <li>
+                        <a class="white-text" href="#!">Đối tác 3</a>
+                    </li>
+                    <li>
+                        <a class="white-text" href="#!">Đối tác 4</a>
+                    </li>
+                </ul>
             </div>
-
-            <input id="hdId" type="hidden" />
-            <input id="hdUserName"
-                   type="hidden" />
-            <input id="hdRole" value="Admin"
-                   type="hidden" />
+            <div class="col l3 s12">
+                <h5 class="white-text">Dối tác bạc</h5>
+                <ul>
+                    <li>
+                        <a class="white-text" href="#!">Đối tác 1</a>
+                    </li>
+                    <li>
+                        <a class="white-text" href="#!">Đối tác 2</a>
+                    </li>
+                    <li>
+                        <a class="white-text" href="#!">Đối tác 3</a>
+                    </li>
+                    <li>
+                        <a class="white-text" href="#!">Đối tác 4</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-    <script>
-    $('#chatBtn').click(function () {
-        $(this).hide('slow');
-        $('#chatDiv').show();
-            });
-    </script>
-<footer class="page-footer teal">
-            <div class="container">
-                <div class="row">
-                    <div class="col l6 s12">
-                        <h5 class="white-text">Company Bio</h5>
-                        <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+    <div class="footer-copyright">
+        <div class="container">
+            Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">me dang it</a>
+        </div>
+    </div>
+</footer>
 
-                    </div>
-                    <div class="col l3 s12">
-                        <h5 class="white-text">Đối tác vàng</h5>
-                        <ul>
-                            <li><a class="white-text" href="#!">Đối tác 1</a></li>
-                            <li><a class="white-text" href="#!">Đối tác 2</a></li>
-                            <li><a class="white-text" href="#!">Đối tác 3</a></li>
-                            <li><a class="white-text" href="#!">Đối tác 4</a></li>
-                        </ul>
-                    </div>
-                    <div class="col l3 s12">
-                        <h5 class="white-text">Dối tác bạc</h5>
-                        <ul>
-                            <li><a class="white-text" href="#!">Đối tác 1</a></li>
-                            <li><a class="white-text" href="#!">Đối tác 2</a></li>
-                            <li><a class="white-text" href="#!">Đối tác 3</a></li>
-                            <li><a class="white-text" href="#!">Đối tác 4</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-copyright">
-                <div class="container">
-                    Made by <a class="brown-text text-lighten-3" href="http://materializecss.com">me dang it</a>
-                </div>
-            </div>
-        </footer>
+<!-- Scripts-->
+<script src="@Url.Content("~/Content/materialize/js/materialize.js")"></script>
+<script src="@Url.Content("~/Content/materialize/js/init.js")"></script>
+@RenderSection("scripts", false)
+<script src="@Url.Content("~/Scripts/jquery.signalR-2.2.1.min.js")"></script>
 
-        <!--  Scripts-->
-        <script src="@Url.Content("~/Content/materialize/js/materialize.js")"></script>
-        <script src="@Url.Content("~/Content/materialize/js/init.js")"></script>
-        @RenderSection("scripts", required: false)
-    <script src="@Url.Content("~/Scripts/jquery.signalR-2.2.1.min.js")"></script>
-
-    <!--Reference the autogenerated SignalR hub script. -->
-    <script src="@Url.Content("/signalr/hubs")"></script>
-    <script src="@Url.Content("~/Scripts/ChatClientSignalR.js")"></script>
+<!--Reference the autogenerated SignalR hub script. -->
+<script src="@Url.Content("/signalr/hubs")"></script>
+<script src="@Url.Content("~/Scripts/ChatClientSignalR.js")"></script>
 </body>
 </html>

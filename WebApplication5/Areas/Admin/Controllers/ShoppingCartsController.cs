@@ -52,10 +52,15 @@ namespace WebApplication5.Areas.Admin.Controllers
         public ActionResult Create([Bind(Include = "Id,UserIdRef,Name,CreateDate")] ShoppingCart shoppingCart)
         {
             if (ModelState.IsValid)
-            {
-                db.ShoppingCarts.Add(shoppingCart);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+            {                
+                if (!db.ShoppingCarts.Any(m => m.UserIdRef.Equals(shoppingCart.UserIdRef)))
+                {
+                    shoppingCart.CreateDate = DateTime.Now.ToShortDateString();
+                    db.ShoppingCarts.Add(shoppingCart);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                return new HttpStatusCodeResult(HttpStatusCode.NotModified);
             }
 
             ViewBag.UserIdRef = new SelectList(db.Users, "Id", "Email", shoppingCart.UserIdRef);

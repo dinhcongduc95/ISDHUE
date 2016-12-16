@@ -5,39 +5,42 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
-
-<div>
-    <h4 class="center">Document</h4>
+<div class="container">
     
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+    <h4 class="center">Tài liệu hướng dẫn: @Model.Title</h4>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+    <div class="row card-panel hoverable">
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Title)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Title)
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Description)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Description)
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.CreateDate)
+            </div>
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateCreated)
-        </dd>
-
-    </dl>
+    <div class="row card-panel hoverable center">
+        @Html.ActionLink("Edit", "Edit", new {id = Model.Id}, new {@class = "waves-effect waves-light btn"})
+        @Html.ActionLink("Back to List", "Index", null, new {@class = "waves-effect waves-light btn"})
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index", null, new { @class= "waves-effect waves-light btn" })
-</p>
+

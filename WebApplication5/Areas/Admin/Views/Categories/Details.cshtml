@@ -5,55 +5,66 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4 class="center">Category</h4>
-    
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Code)
-        </dt>
+<div class="container">
+    <h2 class="center light">Details</h2>
 
-        <dd>
-            @Html.DisplayFor(model => model.Code)
-        </dd>
+    <div class="row card-panel hoverable">
+        @if (string.IsNullOrEmpty(Model.ImageLink))
+        {
+            <img class="responsive-img" src="http://web-vn.com/wp-content/uploads/2014/04/dummy-image-grey-e1398449111870.jpg"/>
+        }
+        else
+        {
+            <img class="responsive-img" src="../../..@Url.Content(Model.ImageLink)"/>
+        }
+    </div>
+    <div class="row card-panel hoverable">
+        <h4 class="center">@Html.Raw(Model.Name)</h4>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Code)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Code)
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Name)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Name)
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Description)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Description)
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </dt>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.CreateDate)
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.CreateDate)
-        </dd>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ImageLink)
-        </dt>
+    <div class="row card-panel hoverable center">
+        @Html.ActionLink("Edit", "Edit", new {id = Model.Id}, new { @class = "waves-effect waves-light btn" }) 
+        @Html.ActionLink("Back to List", "Index", null, new {@class = "waves-effect waves-light btn"})
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.ImageLink)
-        </dd>
-
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index", null, new { @class= "waves-effect waves-light btn" })
-</p>
+    

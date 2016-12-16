@@ -77,7 +77,7 @@ namespace WebApplication5.Controllers
             }
 
             ViewBag.Product = product;
-            var reviews = db.Reviews.Where(m => m.ProductIdRef == id);
+            var reviews = db.Reviews.Include(m => m.User).Where(m => m.ProductIdRef == id);
 
             int pageSize = 3;
             int pageNumber = (page ?? 1);

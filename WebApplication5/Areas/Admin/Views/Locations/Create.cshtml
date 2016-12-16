@@ -5,48 +5,53 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="center">Create</h2>
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="row card-panel hoverable">
-        <h4 class="center">Location</h4>
-        
-        @Html.ValidationSummary(true, "", new { @class = "red-text" })
-        <div class="row">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "red-text" })
+        <div class="row card-panel hoverable">
+            <h4 class="center">Tạo mới địa điểm</h4>
+
+            @Html.ValidationSummary(true, "", new { @class = "red-text" })
+            <div class="row">
+                <div class="col l1 offset-l2">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "" })
+                </div>
+                <div class="col l7">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "red-text" })
+                </div>
             </div>
+
+            <div class="row">
+                <div class="col l1 offset-l2">
+                    @Html.LabelFor(model => model.PostalCode, htmlAttributes: new { @class = "" })
+                </div>
+                <div class="col l7">
+                    @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "" } })
+                    @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "red-text" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col l1 offset-l2">
+                    @Html.LabelFor(model => model.Shippable, htmlAttributes: new { @class = "" })
+                </div>
+                <div class="col l7">
+                    @Html.EditorFor(model => model.Shippable, new { htmlAttributes = new { @class = "" } })
+                    @Html.ValidationMessageFor(model => model.Shippable, "", new { @class = "red-text" })
+                </div>
+            </div>
+
         </div>
 
-        <div class="row">
-            @Html.LabelFor(model => model.PostalCode, htmlAttributes: new { @class = "" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "" } })
-                @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "red-text" })
-            </div>
+        <div class="row card-panel hoverable center">
+            <input type="submit" value="Create" class="btn btn-default" />
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "waves-effect waves-light btn" })
         </div>
-
-        <div class="row">
-            @Html.LabelFor(model => model.Shippable, htmlAttributes: new { @class = "" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Shippable, new { htmlAttributes = new { @class = "" } })
-                @Html.ValidationMessageFor(model => model.Shippable, "", new { @class = "red-text" })
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index", null, new { @class= "waves-effect waves-light btn" })
+    }
 </div>
+
+
+

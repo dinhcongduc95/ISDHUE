@@ -1,3 +1,5 @@
+﻿using System.ComponentModel;
+
 namespace WebApplication5.Models
 {
     using System;
@@ -10,23 +12,21 @@ namespace WebApplication5.Models
     {
         
         public Document()
-        {
-            Parts = new HashSet<Part>();
-            Products = new HashSet<Product>();
+        {           
         }
 
+        [Key]
         public int Id { get; set; }
 
+        [DisplayName("Tên tài liệu")]
+        [Required]
         public string Title { get; set; }
 
+        [DisplayName("Nội dung")]
+        [Required]
         public string Description { get; set; }
 
-        public string DateCreated { get; set; }
-
-        
-        public virtual ICollection<Part> Parts { get; set; }
-
-        
-        public virtual ICollection<Product> Products { get; set; }
+        [DisplayName("Ngày tạo")]        
+        public string CreateDate { get; set; }              
     }
 }

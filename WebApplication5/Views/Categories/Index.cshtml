@@ -1,26 +1,26 @@
 ﻿@model PagedList.IPagedList<WebApplication5.Models.Category>
 @using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="index-banner" class="parallax-container">
+@*<div id="index-banner" class="parallax-container">
     <div class="section no-pad-bot">
         <div class="container">
             <br><br>
-            <h1 class="header center teal-text text-lighten-2">Parallax Template</h1>
+            <h1 class="header center brown-text text-lighten-2">Parallax Template</h1>
             <div class="row center">
                 <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
             </div>
             <div class="row center">
-                <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
+                <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light brown lighten-1">Get Started</a>
             </div>
             <br><br>
         </div>
     </div>
     <div class="parallax"><img src="@Url.Content("~/Content/images/materialize/background1.jpg")" alt="Unsplashed background img 1"></div>
-</div>
+</div>*@
 
 <div class="container">
     <div class="section">
@@ -28,12 +28,24 @@
         <div class="card">
             <div class="card-image">
                 <div class="carousel">
-                    <a class="carousel-item " href="#one!"><img class="responsive-img z-depth-5" src="/Content/images/chair1.jpg"></a>
-                    <a class="carousel-item" href="#two!"><img class="responsive-img z-depth-5" src="/Content/images/chair2.jpg"></a>
-                    <a class="carousel-item" href="#three!"><img class="responsive-img z-depth-5" src="/Content/images/chair3.jpg"></a>
-                    <a class="carousel-item" href="#four!"><img class="responsive-img z-depth-5" src="/Content/images/table1.jpg"></a>
-                    <a class="carousel-item" href="#five!"><img class="responsive-img z-depth-5" src="/Content/images/table2.jpg"></a>
-                    <a class="carousel-item" href="#five!"><img class="responsive-img z-depth-5" src="/Content/images/table3.jpg"></a>
+                    <a class="carousel-item " href="#one!">
+                        <img class="responsive-img z-depth-5" src="/Content/images/chair1.jpg">
+                    </a>
+                    <a class="carousel-item" href="#two!">
+                        <img class="responsive-img z-depth-5" src="/Content/images/chair2.jpg">
+                    </a>
+                    <a class="carousel-item" href="#three!">
+                        <img class="responsive-img z-depth-5" src="/Content/images/chair3.jpg">
+                    </a>
+                    <a class="carousel-item" href="#four!">
+                        <img class="responsive-img z-depth-5" src="/Content/images/table1.jpg">
+                    </a>
+                    <a class="carousel-item" href="#five!">
+                        <img class="responsive-img z-depth-5" src="/Content/images/table2.jpg">
+                    </a>
+                    <a class="carousel-item" href="#five!">
+                        <img class="responsive-img z-depth-5" src="/Content/images/table3.jpg">
+                    </a>
                 </div>
             </div>
             <div class="card-content">
@@ -62,62 +74,68 @@
 
             </div>
             <div class="card-action">
-                <a class="waves-effect waves-light btn" href="#">Gọi ngay cho chúng tôi</a>
             </div>
         </div>
     </div>
 </div>
 
-
-
 <div class="container">
     <div class="section">
-        <div class="row">
-            <div class="col s12 center">
-                <div class="row">                   
-                        @foreach (var item in Model)
-                        {
+
+
+
+        @foreach (var item in Model)
+        {
+            <div class="row center">
+                <div id="" class="parallax-container">
+                    <div class="section">
+                        <div class="container">
                             <div class="col s12" style="padding: 10px">
                                 <div class="card">
                                     <div class="card-image">
-                                        <img class="responsive-img" src="~/Content/images/@Html.Raw(item.ImageLink)"/>
-                                        <h2 class="card-title">
+                                        <h2 class="card-title brown-text">
                                             @Html.DisplayFor(modelItem => item.Name)
                                         </h2>
                                     </div>
                                     <div class="card-content">
                                         <div class="row">
-                                            <p class="light col s6">Name:</p>
-                                            <p class="light col s6">@Html.DisplayFor(modelItem => item.Name)</p>
+                                            <p class="light col s6 brown-text">Name:</p>
+                                            <p class="light col s6 brown-text">@Html.DisplayFor(modelItem => item.Name)</p>
                                         </div>
                                         <div class="row">
-                                            <p class="light col s6">Title:</p>
-                                            <p class="light col s6">@Html.DisplayFor(modelItem => item.Description)</p>
+                                            <p class="light col s6 brown-text">Title:</p>
+                                            <p class="light col s6 brown-text">@Html.DisplayFor(modelItem => item.Description)</p>
                                         </div>
 
                                         <div class="row">
-                                            <p class="light col s6">Code:</p>
-                                            <p class="light col s6">@Html.DisplayFor(modelItem => item.Code)</p>
+                                            <p class="light col s6 brown-text">Code:</p>
+                                            <p class="light col s6 brown-text">@Html.DisplayFor(modelItem => item.Code)</p>
                                         </div>
                                     </div>
                                     <div class="card-action">
-                                        @Html.ActionLink("Xem các sản phẩm trong dòng này", "Details", "Categories", new { id = item.Id }, new { @class = "waves-effect waves-light btn" })
+                                        @Html.ActionLink("Xem các sản phẩm trong dòng này", "Details", "Categories", new {id = item.Id}, new {@class = "waves-effect waves-light btn brown"})
                                     </div>
-                                </div>    
-                            </div> 
-                        }                    
-                </div>
-                <br/>
-                <div class="row" style="text-align: center;">
-                    <div class="col s12">
-                        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-                        @Html.PagedListPager(Model, page => Url.Action("Index",
-                            new {page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter}))
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="parallax">
+                        <img class="responsive-img" src="../..@Url.Content(item.ImageLink)"/>
                     </div>
                 </div>
             </div>
+        }
+
+        <br/>
+        <div class="row" style="text-align: center;">
+            <div class="col s12">
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                @Html.PagedListPager(Model, page => Url.Action("Index",
+                    new {page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter}))
+            </div>
         </div>
+
     </div>
 </div>
 
@@ -129,11 +147,14 @@
             </div>
         </div>
     </div>
-    <div class="parallax"><img src="@Url.Content("~/Content/images/materialize/background3.jpg")" alt="Unsplashed background img 3"></div>
+    <div class="parallax">
+        <img src="@Url.Content("~/Content/images/materialize/background3.jpg")" alt="Unsplashed background img 3">
+    </div>
 </div>
 <script>
-    $(document).ready(function () {
-        $('.carousel').carousel();
-    });
+    $(document)
+        .ready(function() {
+            $('.carousel').carousel();
+        });
 </script>
  

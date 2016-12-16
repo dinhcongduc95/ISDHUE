@@ -51,6 +51,7 @@ namespace WebApplication5.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                category.CreateDate = DateTime.Now.ToShortDateString();
                 db.Categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -126,3 +127,4 @@ namespace WebApplication5.Areas.Admin.Controllers
         }
     }
 }
+

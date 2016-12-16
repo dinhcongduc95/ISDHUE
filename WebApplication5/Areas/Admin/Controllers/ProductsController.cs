@@ -41,7 +41,7 @@ namespace WebApplication5.Areas.Admin.Controllers
         public ActionResult Create()
         {
             ViewBag.CategoryIdRef = new SelectList(db.Categories, "Id", "Code");
-            ViewBag.DocumentIdRef = new SelectList(db.Documents, "Id", "TItle");
+            ViewBag.DocumentIdRef = new SelectList(db.Documents, "Id", "Title");
             return View();
         }
 
@@ -50,10 +50,12 @@ namespace WebApplication5.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Description,Price,Origin,CreateDate,CategoryIdRef,DocumentIdRef")] Product product)
+        public ActionResult Create([Bind(Include = "Id,Name,Description,Price,Origin,CreateDate,CategoryIdRef,DocumentIdRef,ImageLink")] Product product)
         {
             if (ModelState.IsValid)
             {
+                product.CreateDate = DateTime.Now.ToShortDateString();
+
                 db.Products.Add(product);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -86,7 +88,7 @@ namespace WebApplication5.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Description,Price,Origin,CreateDate,CategoryIdRef,DocumentIdRef")] Product product)
+        public ActionResult Edit([Bind(Include = "Id,Name,Description,Price,Origin,CreateDate,CategoryIdRef,DocumentIdRef,ImageLink")] Product product)
         {
             if (ModelState.IsValid)
             {

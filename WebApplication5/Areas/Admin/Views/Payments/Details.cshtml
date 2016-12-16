@@ -5,63 +5,88 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4 class="center">Payment</h4>
-    
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
-        </dt>
+<div class="container">
+    <h4 class="center light">Chi tiết đơn hàng: @Model.Id</h4>
 
-        <dd>
-            @Html.DisplayFor(model => model.AspNetUser.Email)
-        </dd>
+    <div class="row card-panel hoverable">
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Product.Name)
-        </dt>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Id)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Id)
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Product.Name)
-        </dd>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.User.Email)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.User.Email)
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Shipping.Name)
-        </dt>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Product.Name)
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Shipping.Name)
-        </dd>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Product.Name)
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Amount)
-        </dt>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Amount)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Amount)
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Amount)
-        </dd>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Currency)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Currency)
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Currency)
-        </dt>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.IsPaid)
+            </div>
+            <div class="col l6 center">
+                @if (Model.IsPaid)
+                {
+                    @Html.Raw("<p class='green-text'>Đã Thanh Toán</p>")
+                }
+                else
+                {
+                    @Html.Raw("<p class='red-text'>Chưa Thanh Toán</p>")
+                }
+                
+            </div>
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Currency)
-        </dd>
+    <div class="row card-panel hoverable center">
+        @Html.ActionLink("Edit", "Edit",  new { id = Model.Id }, new { @class = "waves-effect waves-light btn" })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "waves-effect waves-light btn" })
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.IsPaid)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsPaid)
-        </dd>
-
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index", null, new { @class= "waves-effect waves-light btn" })
-</p>
+

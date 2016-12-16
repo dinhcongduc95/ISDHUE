@@ -7896,7 +7896,7 @@ input[type=range]:focus::-ms-fill-upper {
 
 @media (min-height: 38.875em) {
   .picker--opened .picker__frame {
-    top: 10%;
+    top: 6%;
     bottom: auto;
   }
 }

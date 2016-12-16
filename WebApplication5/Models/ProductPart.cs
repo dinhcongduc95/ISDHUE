@@ -8,14 +8,18 @@ namespace WebApplication5.Models
 
     public partial class ProductPart
     {
+
+        [Key]
         public int Id { get; set; }
 
         public int PartIdRef { get; set; }
 
-        public int? Product_Id { get; set; }
+        public int? ProductIdRef { get; set; }
 
+        [ForeignKey("PartIdRef")]
         public virtual Part Part { get; set; }
 
+        [ForeignKey("ProductIdRef")]
         public virtual Product Product { get; set; }
     }
 }

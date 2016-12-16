@@ -1,3 +1,5 @@
+﻿using System.ComponentModel;
+
 namespace WebApplication5.Models
 {
     using System;
@@ -10,48 +12,47 @@ namespace WebApplication5.Models
     {
         
         public Product()
-        {
-            CartProducts = new HashSet<CartProduct>();
-            Payments = new HashSet<Payment>();
-            ProductParts = new HashSet<ProductPart>();
-            Reviews = new HashSet<Review>();
+        {            
         }
 
         public int Id { get; set; }
-
+        
+        [Required]
+        [DisplayName("Tên sản phẩm")]
         public string Name { get; set; }
 
+        [DisplayName("Mô tả sản phẩm")]
         public string Description { get; set; }
 
+        [Required]
+        [DisplayName("Giá")]
         public decimal? Price { get; set; }
 
+        [DisplayName("Xuất xứ")]
         public string Origin { get; set; }
 
+        [DisplayName("Ngày tạo")]
         public string CreateDate { get; set; }
 
+        [DisplayName("Hình ảnh")]
         public string ImageLink{ get; set; }
 
-        
+        [Required]
+        [DisplayName("Danh mục")]
         public int CategoryIdRef { get; set; }
 
+        [Required]
+        [DisplayName("Tài liệu hướng dẫn")]
         public int DocumentIdRef { get; set; }
 
-
+       
+        [DisplayName("Danh mục")]
         [ForeignKey("CategoryIdRef")]
         public virtual Category Category { get; set; }
 
+        [DisplayName("Tài liệu hướng dẫn")]
         [ForeignKey("DocumentIdRef")]
         public virtual Document Document { get; set; }
-
-        
-        public virtual ICollection<Payment> Payments { get; set; }
-
-       
-        public virtual ICollection<ProductPart> ProductParts { get; set; }
-
-        
-        public virtual ICollection<Review> Reviews { get; set; }
-
-        public virtual ICollection<CartProduct> CartProducts { get; set; }
+                
     }
 }

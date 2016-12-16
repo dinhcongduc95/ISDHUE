@@ -1,3 +1,5 @@
+﻿using System.ComponentModel;
+
 namespace WebApplication5.Models
 {
     using System;
@@ -8,29 +10,42 @@ namespace WebApplication5.Models
 
     public partial class Part
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        
         public Part()
         {
-            ProductParts = new HashSet<ProductPart>();
+            
         }
 
+        [Key]
         public int Id { get; set; }
 
+        [DisplayName("Tên")]
+        [Required]
         public string Name { get; set; }
 
         public string Description { get; set; }
 
+        [DisplayName("Hình ảnh")]
+        [Required]
+        public string ImageLink { get; set; }
+
+        [DisplayName("Xuất sứ")]
+        [Required]
         public string Origin { get; set; }
 
+        [DisplayName("Nhà sản xuất")]
+        [Required]
         public string Manufacturer { get; set; }
 
+        [DisplayName("Ngày tạo")]        
         public string CreateDate { get; set; }
 
+        [DisplayName("Tài liệu")]
+        [Required]
         public int DocumentIdRef { get; set; }
 
+        [ForeignKey("DocumentIdRef")]
         public virtual Document Document { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductPart> ProductParts { get; set; }
+       
     }
 }

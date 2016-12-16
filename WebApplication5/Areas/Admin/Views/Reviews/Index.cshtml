@@ -13,7 +13,7 @@
 <div class="container"><div class="row card-panel hoverable">@Html.ActionLink("Create New", "Create", null, new { @class = "waves-effect waves-light btn" })<table class="highlight striped responsive-table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            @Html.DisplayNameFor(model => model.User.Email)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Product.Name)
@@ -33,7 +33,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+            @Html.DisplayFor(modelItem => item.User.Email)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Product.Name)

@@ -1,3 +1,5 @@
+﻿using System.ComponentModel;
+
 namespace WebApplication5.Models
 {
     using System;
@@ -7,30 +9,43 @@ namespace WebApplication5.Models
     using System.Data.Entity.Spatial;
 
     public partial class Shipping
-    {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    {        
         public Shipping()
-        {
-            Payments = new HashSet<Payment>();
+        {            
         }
 
+        [Key]
         public int Id { get; set; }
 
+        [Required]
+        [DisplayName("Địa chỉ")]
         public int LocationIdRef { get; set; }
 
+        [Required]
+        [DisplayName("Tên")]
         public string Name { get; set; }
 
+        [Required]
+        [DisplayName("Mô tả")]
         public string Description { get; set; }
 
+        [Required]
+        [DisplayName("Cách thanh toán")]
         public string PaymentType { get; set; }
 
+        [Required]
+        [DisplayName("Hạn cuối")]
         public string DeadLine { get; set; }
 
+        [Required]
+        [DisplayName("Điện thoại")]
         public string PhoneNo { get; set; }
 
-        public virtual Location Location { get; set; }
+        [DisplayName("Ngày tạo")]
+        public string CreateDate { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payment> Payments { get; set; }
+        [ForeignKey("LocationIdRef")]
+        public Location Location { get; set; }
+        
     }
 }

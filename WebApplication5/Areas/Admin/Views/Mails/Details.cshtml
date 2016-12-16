@@ -5,63 +5,85 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="container">
+    <h4 class="center light">Chi tiết bản ghi Mail: @Model.Id</h4>
+    <div class="row card-panel hoverable">
 
-<div>
-    <h4 class="center">Mail</h4>
-    
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
-        </dt>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Id)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Id)
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.AspNetUser.Email)
-        </dd>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.User.Email)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.User.Email)
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Title)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Title)
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Description)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Description)
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.MailContent)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.MailContent)
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.CreateDate)
+            </div>
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.IsSent)
+            </div>
+            <div class="col l6 center">
+                @if (Model.IsSent)
+                {
+                    <p class="green-text">Đã gửi</p>
+                }
+                else
+                {
+                    <p class="red-text">Chưa gửi</p>
+                }                
+            </div>
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.MailContent)
-        </dt>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.MailContent)
-        </dd>
+    <div class="row card-panel hoverable center">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "waves-effect waves-light btn" })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "waves-effect waves-light btn" })
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateCreated)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsSent)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsSent)
-        </dd>
-
-    </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index", null, new { @class= "waves-effect waves-light btn" })
-</p>

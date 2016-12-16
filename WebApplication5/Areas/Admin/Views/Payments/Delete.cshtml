@@ -5,69 +5,92 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
+<div class="container">
+    <h4 class="center light">Chi tiết đơn hàng: @Model.Id</h4>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4 class="center">Payment</h4>
-    
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
-        </dt>
+    <div class="row card-panel hoverable">
 
-        <dd>
-            @Html.DisplayFor(model => model.AspNetUser.Email)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Product.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Product.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Shipping.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Shipping.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Amount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Amount)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Currency)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Currency)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IsPaid)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IsPaid)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index", null, new { @class= "waves-effect waves-light btn" })
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Id)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Id)
+            </div>
         </div>
-    }
+
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.User.Email)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.User.Email)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Product.Name)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Product.Name)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Amount)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Amount)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Currency)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Currency)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.IsPaid)
+            </div>
+            <div class="col l6 center">
+                @if (Model.IsPaid)
+                {
+                    @Html.Raw("<p class='green-text'>Đã Thanh Toán</p>")
+                }
+                else
+                {
+                    @Html.Raw("<p class='red-text'>Chưa Thanh Toán</p>")
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="row card-panel hoverable center">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" />
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "waves-effect waves-light btn" })
+            </div>
+        }
+    </div>
+    
 </div>

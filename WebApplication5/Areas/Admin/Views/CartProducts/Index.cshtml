@@ -1,40 +1,148 @@
-﻿@model IEnumerable<WebApplication5.Models.CartProduct>
+﻿@using WebApplication5.Models
+@model IEnumerable<WebApplication5.Models.Product>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="center">Index</h2>
+<div class="container">
+    <h4 class="center light">
+        Sản phẩm của giỏ hàng với id: @ViewBag.CartId
+    </h4>
+    <div class="row card-panel hoverable">
+        <input type="hidden" name="CartId" value="@ViewBag.CartId"/>
+        @Html.ActionLink("Create New", "Create", new {id = ViewBag.CartId}, new {@class = "waves-effect waves-light btn"})
+        <table class="highlight striped responsive-table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category.Code)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Document.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Origin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+                <th></th>
+            </tr>
 
-<p>
-    
-</p>
-<div class="container"><div class="row card-panel hoverable">@Html.ActionLink("Create New", "Create", null, new { @class = "waves-effect waves-light btn" })<table class="highlight striped responsive-table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Product.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ShoppingCart.UserIdRef)
-        </th>
-        <th></th>
-    </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Document.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Origin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateDate)
+                    </td>
+                    <td>
+                        <input type="checkbox" class="deleteProductCb" id="item_@item.Id"/>
+                        <label for="item_@item.Id"></label>
+                    </td>
+                </tr>
+            }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Product.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ShoppingCart.UserIdRef)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+        </table>
 
-</table></div></div>
+        <div class="center" style="margin-top: 10px;">
+            <a class="waves-effect waves-light btn" id="deleteBtn">Xóa sản phẩm</a>
+        </div>
+    </div>
+
+    <div class="row card-panel hoverable">
+
+        <table class="highlight striped responsive-table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category.Code)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Document.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Origin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreateDate)
+                </th>
+                <th>
+
+                </th>
+            </tr>
+
+            @foreach (Product item in ViewBag.CartProductAvails)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Document.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Origin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateDate)
+                    </td>
+                    <td>
+                        <input type="checkbox" class="addProductCb" id="item_@item.Id"/>
+                        <label for="item_@item.Id"></label>
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <div class="center" style="margin-top: 10px;">
+            <a class="waves-effect waves-light btn" id="addBtn">Thêm sản phẩm</a>
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content("~/Areas/Admin/Scripts/CartProductScript.js")"></script>

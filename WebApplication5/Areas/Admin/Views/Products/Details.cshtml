@@ -4,71 +4,98 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4 class="center">Product</h4>
-    
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.Code)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Category.Code)
-        </dd>
+<div class="container">
+    <h2 class="center light">Chi tiết sản phẩm: @Model.Name</h2>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Document.Title)
-        </dt>
+    <div class="section">
+        <div class="row card-panel hoverable">
+            @if (string.IsNullOrEmpty(Model.ImageLink))
+            {
+                <img class="responsive-img" src="http://web-vn.com/wp-content/uploads/2014/04/dummy-image-grey-e1398449111870.jpg" />
+            }
+            else
+            {
+                <img class="responsive-img" src="@Url.Content(Model.ImageLink)" />
+            }            
+        </div>
+        <div class="row card-panel hoverable">
+            <h4 class="center">@Html.Raw(Model.Name)</h4>
 
-        <dd>
-            @Html.DisplayFor(model => model.Document.Title)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+            <div class="row">
+                <div class="col l6 center">
+                    @Html.DisplayNameFor(model => model.Category.Code)
+                </div>
+                <div class="col l6 center">
+                    @Html.DisplayFor(model => model.Category.Code)
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            <div class="row">
+                <div class="col l6 center">
+                    @Html.DisplayNameFor(model => model.Document.Title)
+                </div>
+                <div class="col l6 center">
+                    @Html.DisplayFor(model => model.Document.Title)
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+            <div class="row">
+                <div class="col l6 center">
+                    @Html.DisplayNameFor(model => model.Name)
+                </div>
+                <div class="col l6 center">
+                    @Html.DisplayFor(model => model.Name)
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+            <div class="row">
+                <div class="col l6 center">
+                    @Html.DisplayNameFor(model => model.Description)
+                </div>
+                <div class="col l6 center">
+                    @Html.DisplayFor(model => model.Description)
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Price)
-        </dt>
+            <div class="row">
+                <div class="col l6 center">
+                    @Html.DisplayNameFor(model => model.Price)
+                </div>
+                <div class="col l6 center">
+                    @Html.DisplayFor(model => model.Price)
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Price)
-        </dd>
+            <div class="row">
+                <div class="col l6 center">
+                    @Html.DisplayNameFor(model => model.Origin)
+                </div>
+                <div class="col l6 center">
+                    @Html.DisplayFor(model => model.Origin)
+                </div>
+            </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Origin)
-        </dt>
+            <div class="row">
+                <div class="col l6 center">
+                    @Html.DisplayNameFor(model => model.CreateDate)
+                </div>
+                <div class="col l6 center">
+                    @Html.DisplayFor(model => model.CreateDate)
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Origin)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CreateDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreateDate)
-        </dd>
-
-    </dl>
+        </div>
+    </div>
+    <div class="row card-panel hoverable center">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id}, new { @class = "waves-effect waves-light btn" }) 
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "waves-effect waves-light btn" })
+    </div>
 </div>
+
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index", null, new { @class= "waves-effect waves-light btn" })
+    
 </p>

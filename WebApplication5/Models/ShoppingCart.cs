@@ -1,3 +1,6 @@
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace WebApplication5.Models
 {
     using System.Collections.Generic;
@@ -7,20 +10,26 @@ namespace WebApplication5.Models
     {        
         public ShoppingCart()
         {
-            CartProducts = new HashSet<CartProduct>();
+           
         }
 
+        [Key]
         public int Id { get; set; }
 
+        [Required]
         [StringLength(128)]
+        [DisplayName("Người dùng")]
         public string UserIdRef { get; set; }
 
+        [Required]
+        [DisplayName("Tên")]
         public string Name { get; set; }
 
+        [DisplayName("Ngày tạo")]
         public string CreateDate { get; set; }
 
+        [ForeignKey("UserIdRef")]
         public virtual ApplicationUser User { get; set; }
-       
-        public virtual ICollection<CartProduct> CartProducts { get; set; }
+               
     }
 }

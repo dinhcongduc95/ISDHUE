@@ -4,85 +4,115 @@
     ViewBag.Title = "Create";
 }
 
-<h2 class="center">Create</h2>
+<h2 class="center light">Tạo sản phẩm mới</h2>
 
-
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="row card-panel hoverable">
-        <h4 class="center">Product</h4>
+<div class="container">
+    <div class="section">
         
-        @Html.ValidationSummary(true, "", new { @class = "red-text" })
-        <div class="row">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "red-text" })
-            </div>
-        </div>
+        @using (Html.BeginForm())
+        {
+        
+            <div class="row card-panel hoverable">
+                <img class="responsive-img" id="Thumbnail"src="http://web-vn.com/wp-content/uploads/2014/04/dummy-image-grey-e1398449111870.jpg" />
+                <div class="row">
+                    <div class="col l1 offset-l2">
+                        @Html.LabelFor(model => model.ImageLink, "Hình ảnh")
+                    </div>
+                    <div class="col l5">
+                        @Html.TextBoxFor(m => m.ImageLink, new { id = "ImageLink", @readonly = "" })
 
-        <div class="row">
-            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "" } })
-                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "red-text" })
+                        @Html.ValidationMessageFor(model => model.ImageLink, "", new { @class = "red-text" })
+                    </div>
+                    <div class="col l2 center">
+                        <a class="waves-effect waves-light btn" id="btnChooseImage">Chọn ảnh</a>
+                    </div>
+                </div>
             </div>
-        </div>
+            @Html.AntiForgeryToken()
+            <div class="row card-panel hoverable">
+                @Html.ValidationSummary(true, "", new {@class = "red-text"})
+                <div class="row">
+                    <div class="col l1 offset-l2">
+                        @Html.LabelFor(model => model.Name, htmlAttributes: new {@class = ""})
+                    </div>
+                    <div class="col l7">
+                        @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = ""}})
+                        @Html.ValidationMessageFor(model => model.Name, "", new {@class = "red-text"})
+                    </div>
+                </div>
 
-        <div class="row">
-            @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "" } })
-                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "red-text" })
-            </div>
-        </div>
+                <div class="row">
+                    <div class="col l1 offset-l2">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new {@class = ""})
+                    </div>
+                    <div class="col l7">
+                        @Html.EditorFor(model => model.Description, new {htmlAttributes = new {@class = ""}})
+                        @Html.ValidationMessageFor(model => model.Description, "", new {@class = "red-text"})
+                    </div>
+                </div>
 
-        <div class="row">
-            @Html.LabelFor(model => model.Origin, htmlAttributes: new { @class = "" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Origin, new { htmlAttributes = new { @class = "" } })
-                @Html.ValidationMessageFor(model => model.Origin, "", new { @class = "red-text" })
-            </div>
-        </div>
+                <div class="row">
+                    <div class="col l1 offset-l2">
+                        @Html.LabelFor(model => model.Price, htmlAttributes: new {@class = ""})
+                    </div>
+                    <div class="col l7">
+                        @Html.EditorFor(model => model.Price, new {htmlAttributes = new {@class = ""}})
+                        @Html.ValidationMessageFor(model => model.Price, "", new {@class = "red-text"})
+                    </div>
+                </div>
 
-        <div class="row">
-            @Html.LabelFor(model => model.CreateDate, htmlAttributes: new { @class = "" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreateDate, new { htmlAttributes = new { @class = "" } })
-                @Html.ValidationMessageFor(model => model.CreateDate, "", new { @class = "red-text" })
-            </div>
-        </div>
+                <div class="row">
+                    <div class="col l1 offset-l2">
+                        @Html.LabelFor(model => model.Origin, htmlAttributes: new {@class = ""})
+                    </div>
+                    <div class="col l7">
+                        @Html.EditorFor(model => model.Origin, new {htmlAttributes = new {@class = ""}})
+                        @Html.ValidationMessageFor(model => model.Origin, "", new {@class = "red-text"})
+                    </div>
+                </div>
 
-        <div class="row">
-            @Html.LabelFor(model => model.CategoryIdRef, "CategoryIdRef", htmlAttributes: new { @class = "" })
-            <div class="col-md-10">
-                @Html.DropDownList("CategoryIdRef", null, htmlAttributes: new { @class = "" })
-                @Html.ValidationMessageFor(model => model.CategoryIdRef, "", new { @class = "red-text" })
-            </div>
-        </div>
+                <div class="row">
+                    <div class="col l1 offset-l2">
+                        @Html.LabelFor(model => model.CategoryIdRef)
+                    </div>
+                    <div class="col l7">
+                        @Html.DropDownList("CategoryIdRef")
+                        @Html.ValidationMessageFor(model => model.CategoryIdRef, "", new {@class = "red-text"})
+                    </div>
+                </div>
 
-        <div class="row">
-            @Html.LabelFor(model => model.DocumentIdRef, "DocumentIdRef", htmlAttributes: new { @class = "" })
-            <div class="col-md-10">
-                @Html.DropDownList("DocumentIdRef", null, htmlAttributes: new { @class = "" })
-                @Html.ValidationMessageFor(model => model.DocumentIdRef, "", new { @class = "red-text" })
-            </div>
-        </div>
 
-        <div class="row">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <div class="row">
+                    <div class="col l1 offset-l2">
+                        @Html.LabelFor(model => model.DocumentIdRef)
+                    </div>
+                    <div class="col l7">
+                        @Html.DropDownList("DocumentIdRef")
+                        @Html.ValidationMessageFor(model => model.DocumentIdRef, "", new {@class = "red-text"})
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="center">
+                        <input type="submit" value="Create" class="btn btn-default"/>
+                    </div>
+                </div>
             </div>
+        }
+    </div>
+
+    <div class="section">
+        <div class="center">
+            @Html.ActionLink("Back to List", "Index", null, new {@class = "waves-effect waves-light btn"})
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index", null, new { @class= "waves-effect waves-light btn" })
 </div>
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script src="@Url.Content("~/Content/ckfinder/ckfinder.js")"></script>
+<script src="@Url.Content("~/Scripts/ChooseImageScript.js")"></script>

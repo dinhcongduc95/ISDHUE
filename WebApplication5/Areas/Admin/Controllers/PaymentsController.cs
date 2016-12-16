@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -51,6 +52,7 @@ namespace WebApplication5.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                payment.CreateDate = DateTime.Now.ToShortDateString();
                 db.Payments.Add(payment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -85,7 +87,7 @@ namespace WebApplication5.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,UserIdRef,ProductIdRef,ShippingIdRef,Amount,Currency,IsPaid")] Payment payment)
+        public ActionResult Edit([Bind(Include = "Id,UserIdRef,ProductIdRef,ShippingIdRef,Amount,Currency,IsPaid,CreateDate")] Payment payment)
         {
             if (ModelState.IsValid)
             {

@@ -5,45 +5,48 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Delete</h2>
+<div class="container">
+    <h4 class="center">Địa điểm: @Model.Name</h4>
+    <div class="row card-panel hoverable">
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4 class="center">Location</h4>
-    
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PostalCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PostalCode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Shippable)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Shippable)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index", null, new { @class= "waves-effect waves-light btn" })
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Name)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Name)
+            </div>
         </div>
-    }
+
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.PostalCode)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.PostalCode)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Shippable)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Shippable)
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row card-panel hoverable center">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default"/>
+                @Html.ActionLink("Back to List", "Index", null, new {@class = "waves-effect waves-light btn"})
+            </div>
+        }
+    </div>
 </div>

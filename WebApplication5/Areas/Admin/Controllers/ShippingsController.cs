@@ -49,10 +49,11 @@ namespace WebApplication5.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,LocationIdRef,Name,Description,PaymentType,DeadLine,PhoneNo")] Shipping shipping)
+        public ActionResult Create([Bind(Include = "Id,LocationIdRef,Name,Description,PaymentType,DeadLine,PhoneNo,CreateDate")] Shipping shipping)
         {
             if (ModelState.IsValid)
             {
+                shipping.CreateDate = DateTime.Now.ToShortDateString();
                 db.Shippings.Add(shipping);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -83,7 +84,7 @@ namespace WebApplication5.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,LocationIdRef,Name,Description,PaymentType,DeadLine,PhoneNo")] Shipping shipping)
+        public ActionResult Edit([Bind(Include = "Id,LocationIdRef,Name,Description,PaymentType,DeadLine,PhoneNo,CreateDate")] Shipping shipping)
         {
             if (ModelState.IsValid)
             {

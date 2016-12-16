@@ -46,7 +46,7 @@ namespace WebApplication5.Controllers
             
                 IEnumerable<Product> products = from p in db.Products
                     join pc in db.CartProducts on p.Id equals pc.ProductIdRef
-                    where pc.ShoppingCart_Id == shoppingCart.Id
+                    where pc.ShoppingCartIdRef == shoppingCart.Id
                     select p;
             if (shoppingCart == null)
             {
@@ -89,7 +89,7 @@ namespace WebApplication5.Controllers
             var userId = User.Identity.GetUserId();
             // Mỗi khi tạo user đều tạo 1 cart tương ứng với user nên ko cần check null
             var shoppingCart = db.ShoppingCarts.SingleOrDefault(m => m.UserIdRef.Equals(userId));
-            var isInCart = db.CartProducts.Where(m => m.ProductIdRef == productId).Any(m => m.ShoppingCart_Id == shoppingCart.Id);
+            var isInCart = db.CartProducts.Where(m => m.ProductIdRef == productId).Any(m => m.ShoppingCartIdRef == shoppingCart.Id);
             if (isInCart)
             {
                 message = "Sản phẩm đã nằm trong giỏ hàng của bạn rồi";
@@ -101,7 +101,7 @@ namespace WebApplication5.Controllers
                 db.CartProducts.Add(new CartProduct
                 {
                     ProductIdRef = productId,
-                    ShoppingCart_Id = shoppingCart.Id
+                    ShoppingCartIdRef = shoppingCart.Id
                 });
             }            
             

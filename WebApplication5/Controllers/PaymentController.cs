@@ -27,7 +27,7 @@ namespace WebApplication5.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
             }
 
-            var msg = "";
+            var msg = string.Empty;
 
             var products = GetProducts();
             if (!products.Any())
@@ -77,7 +77,7 @@ namespace WebApplication5.Controllers
                 Amount = price,
                 UserIdRef = User.Identity.GetUserId(),
                 Currency = "VND",
-                IsPaid = 0,
+                IsPaid = false,
                 ProductIdRef = productId,
                 ShippingIdRef = shippingId,
                 
@@ -96,7 +96,7 @@ namespace WebApplication5.Controllers
             var userId = User.Identity.GetUserId();
             // Mỗi khi tạo user đều tạo 1 cart tương ứng với user nên ko cần check null
             var shoppingCart = db.ShoppingCarts.SingleOrDefault(m => m.UserIdRef.Equals(userId));
-            var cartProducts = db.CartProducts.Where(m => m.ShoppingCart_Id == shoppingCart.Id);
+            var cartProducts = db.CartProducts.Where(m => m.ShoppingCartIdRef == shoppingCart.Id);
             var products = (from p in db.Products
                             join cp in cartProducts on p.Id equals cp.ProductIdRef
                             select p);

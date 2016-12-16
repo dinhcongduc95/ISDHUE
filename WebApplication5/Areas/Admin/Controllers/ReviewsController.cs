@@ -54,12 +54,14 @@ namespace WebApplication5.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                review.CreateDate = DateTime.Now.ToShortDateString();
+                review.User = db.Users.Find(review.UserIdRef);
                 db.Reviews.Add(review);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.UserIdRef = new SelectList(db.Users, "Id", "Email", review.User.Id);
+            ViewBag.UserIdRef = new SelectList(db.Users, "Id", "Email", review.UserIdRef);
             ViewBag.ProductIdRef = new SelectList(db.Products, "Id", "Name", review.ProductIdRef);
             return View(review);
         }
@@ -76,7 +78,7 @@ namespace WebApplication5.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.UserIdRef = new SelectList(db.Users, "Id", "Email", review.User.Id);
+            ViewBag.UserIdRef = new SelectList(db.Users, "Id", "Email", review.UserIdRef);
             ViewBag.ProductIdRef = new SelectList(db.Products, "Id", "Name", review.ProductIdRef);
             return View(review);
         }
@@ -90,11 +92,13 @@ namespace WebApplication5.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var test = db.Users.SingleOrDefault(m => m.Id.Equals(review.UserIdRef));
+                review.User = test;
                 db.Entry(review).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.UserIdRef = new SelectList(db.Users, "Id", "Email", review.User.Id);
+            ViewBag.UserIdRef = new SelectList(db.Users, "Id", "Email", review.UserIdRef);
             ViewBag.ProductIdRef = new SelectList(db.Products, "Id", "Name", review.ProductIdRef);
             return View(review);
         }

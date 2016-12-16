@@ -5,7 +5,7 @@
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="center">Index</h2>
+<h2 class="center light">Quản lí đơn hàng</h2>
 
 <p>
     
@@ -13,7 +13,7 @@
 <div class="container"><div class="row card-panel hoverable">@Html.ActionLink("Create New", "Create", null, new { @class = "waves-effect waves-light btn" })<table class="highlight striped responsive-table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+            @Html.DisplayNameFor(model => model.User.Email)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Product.Name)
@@ -36,7 +36,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.AspNetUser.Email)
+            @Html.DisplayFor(modelItem => item.User.Email)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Product.Name)
@@ -51,7 +51,16 @@
             @Html.DisplayFor(modelItem => item.Currency)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.IsPaid)
+            
+            @if (item.IsPaid)
+            {
+                @Html.Raw("<p class='green-text'>Đã Thanh Toán</p>")                
+            }
+            else
+            {
+                @Html.Raw("<p class='red-text'>Chưa Thanh Toán</p>")
+            }
+
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
