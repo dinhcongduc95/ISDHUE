@@ -103,8 +103,8 @@ namespace WebApplication5.Controllers
                     ProductIdRef = productId,
                     ShoppingCartIdRef = shoppingCart.Id
                 });
-            }            
-            
+            }
+            db.SaveChanges();
             return RedirectToAction("Details", "Products", new { id = productId, msg = message });
         }
     }

@@ -5,14 +5,14 @@
     {
     @Html.AntiForgeryToken()    
         <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", new {area = ""}, htmlAttributes: new { title = "Manage", @style = "text-decoration: none" })
+            @Html.ActionLink("Chào bạn " + User.Identity.GetUserName() + "!", "Index", "Manage", new {area = ""}, htmlAttributes: new { title = "Manage", @style = "text-decoration: none" })
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()" style = "text-decoration: none">Log off</a></li>    
+        <li><a href="javascript:document.getElementById('logoutForm').submit()" style = "text-decoration: none">Đăng xuất</a></li>    
     }
 }
 else
 {   
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @style = "text-decoration: none" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @style = "text-decoration: none" })</li>
+        <li>@Html.ActionLink("Đăng kí", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @style = "text-decoration: none" })</li>
+        <li>@Html.ActionLink("Đăng nhập", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @style = "text-decoration: none" })</li>
   
 }

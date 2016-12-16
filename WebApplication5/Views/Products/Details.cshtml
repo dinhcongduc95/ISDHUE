@@ -18,7 +18,7 @@
 
 
 <div class="container">
-    <h2 class="header teal-text text-lighten-2 center">CHI TIẾT SẢN PHẨM</h2>
+    <h2 class="header brown-text text-lighten-2 center">CHI TIẾT SẢN PHẨM</h2>
     <h4 class="light center">@product.Name</h4>
     <div class="section">
         <!-- Icon Section -->
@@ -66,7 +66,7 @@
 
             </div>
             <div class="card-action">
-                @Html.ActionLink("Cho vào giỏ hàng ngay", "AddToCart", "Carts", new {id = product.Id}, new {@class = "waves-effect waves-light btn"})
+                @Html.ActionLink("Cho vào giỏ hàng ngay", "AddToCart", "Carts", new {productId = product.Id}, new {@class = "waves-effect waves-light btn"})
             </div>
         </div>
     </div>
@@ -187,12 +187,14 @@
     @if (User.Identity.IsAuthenticated)
     {
         <div class="row">
-            <div class="col-sm-6">
+           
                 @using (Html.BeginForm("AddReview", "Products", FormMethod.Post, new { @class = "form-horizontal", @id = "commentForm", role = "form" }))
                 {
                     <div class="row">
-                        <label for="addComment" class="col-sm-2 control-label">Rating</label>
-                        <div class="col l6">
+                        <div class="col l1">
+                            <label for="addComment" class="col-sm-2 control-label">Rating</label>
+                        </div>
+                        <div class="col l11">
                             <a id="1" class="col l2 waves-effect waves-light btn yellow nice">
                                 <i id="oneStar" class="tiny material-icons">star_rate</i>
                             </a>
@@ -221,20 +223,31 @@
 
                     </script>
                     <input type="hidden" name="point" value="5">
-                    <input type="hidden" name="productId" value="@product.Id" />
+                    <input type="hidden" name="productId" value="@product.Id"/>
+
                     <div class="row">
-                        <label for="addComment" class="col-sm-2 control-label">Comment</label>
-                        <div class="col-sm-10">
-                            <textarea class="" name="addComment" id="addComment" rows="10"></textarea>
-                        </div>
+                        <form class="col l12">
+                            <div class="row">
+                                <div class="col l12">
+                                    <div class="col l1">
+                                        <label for="addComment">Nội dung</label>
+                                    </div>                                    
+                                    <div class="col l11">
+                                        <textarea name="addComment" id="addComment" class="materialize-textarea"></textarea>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
+                    
                     <div class="row">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button class="btn btn-success btn-circle text-uppercase" type="submit" id="submitComment"><span class="glyphicon glyphicon-send"></span> Summit comment</button>
+                            <button class="btn btn-success text-uppercase" type="submit" id="submitComment"><span class="glyphicon glyphicon-send"></span>Gửi nhận xét</button>
                         </div>
                     </div>
                 }
-            </div>
+            
         </div>
     }
     
