@@ -57,7 +57,7 @@ namespace WebApplication5.Controllers
                     break;
             }
 
-            int pageSize = 2;
+            int pageSize = 15;
             int pageNumber = (page ?? 1);
             return View(products.ToPagedList(pageNumber, pageSize));
         }

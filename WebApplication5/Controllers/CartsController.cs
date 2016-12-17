@@ -74,7 +74,7 @@ namespace WebApplication5.Controllers
                     break;
             }
             
-            int pageSize = 2;
+            int pageSize = 9;
             int pageNumber = (page ?? 1);
             return View(products.ToPagedList(pageNumber, pageSize));
         }
@@ -106,6 +106,26 @@ namespace WebApplication5.Controllers
             }
             db.SaveChanges();
             return RedirectToAction("Details", "Products", new { id = productId, msg = message });
+        }
+
+        public ActionResult RemoveFromCart(int productId)
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
+            }
+            string message = "";
+            var userId = User.Identity.GetUserId();
+            // Mỗi khi tạo user đều tạo 1 cart tương ứng với user nên ko cần check null
+
+            var cartProduct = db.CartProducts.Include(m => m.ShoppingCart).SingleOrDefault(m => m.ShoppingCart.UserIdRef.Equals(userId) && m.ProductIdRef == productId);
+            if (cartProduct != null)
+            {
+                db.CartProducts.Remove(cartProduct);
+            }
+            
+            db.SaveChanges();
+            return RedirectToAction("Index", "Carts");
         }
     }
 }

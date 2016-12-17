@@ -199,10 +199,12 @@
     <Compile Include="Areas\Admin\Controllers\PartsController.cs" />
     <Compile Include="Areas\Admin\Controllers\PaymentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductPartsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ReviewsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ShippingsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ShoppingCartsController.cs" />
+    <Compile Include="Areas\Admin\Models\AccountViewModel.cs" />
     <Compile Include="ChatHub\ChatHub.cs" />
     <Compile Include="ChatHub\Models\MessageDetail.cs" />
     <Compile Include="ChatHub\Models\UserDetail.cs" />
@@ -1303,6 +1305,7 @@
     <Content Include="Content\materialize\fonts\roboto\Roboto-Thin.woff2" />
     <Content Include="Content\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
     <Content Include="Content\ckfinder\userfiles\.htaccess" />
+    <Content Include="Areas\Admin\Views\Accounts\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1362,7 +1365,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Content\ckfinder\core\connector\Content\FileUpload\flash\" />
     <Folder Include="Content\ckfinder\core\connector\Content\FileUpload\images\" />
   </ItemGroup>

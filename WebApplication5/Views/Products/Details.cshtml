@@ -66,14 +66,14 @@
 
             </div>
             <div class="card-action">
-                @Html.ActionLink("Cho vào giỏ hàng ngay", "AddToCart", "Carts", new {productId = product.Id}, new {@class = "waves-effect waves-light btn"})
+                @Html.ActionLink("Cho vào giỏ hàng ngay", "AddToCart", "Carts", new {productId = product.Id}, new {@class = "waves-effect waves-light btn brown"})
             </div>
         </div>
     </div>
     <div class="section">
         <div class="row z-depth-1" style="padding:10px">
             <div class="col s5">
-                <div class="z-depth-1" style="padding: 10px">
+                <div class="" style="padding: 10px">
                     <div class="row">
                         <div class="col offset-l1">
                             <h4 class="center">Average user rating</h4>
@@ -84,19 +84,19 @@
                     </div>
 
                     <div class="row">
-                        <a class="col l2 offset-l1 waves-effect waves-light btn margin-star" aria-label="Left Align">
+                        <a class="col l2 offset-l1 waves-effect waves-light btn margin-star brown" aria-label="Left Align">
                             <i class="tiny material-icons">star_rate</i>
                         </a>
-                        <a class="col l2 waves-effect waves-light btn margin-star" aria-label="Left Align">
+                        <a class="col l2 waves-effect waves-light btn margin-star brown" aria-label="Left Align">
                             <i class="tiny material-icons">star_rate</i>
                         </a>
-                        <a class="col l2 waves-effect waves-light btn margin-star" aria-label="Left Align">
+                        <a class="col l2 waves-effect waves-light btn margin-star brown" aria-label="Left Align">
                             <i class="material-icons">star_rate</i>
                         </a>
-                        <a class="col l2 waves-effect waves-light btn margin-star" aria-label="Left Align">
+                        <a class="col l2 waves-effect waves-light btn margin-star brown" aria-label="Left Align">
                             <i class="material-icons">star_rate</i>
                         </a>
-                        <a class="col l2 waves-effect waves-light btn margin-star" aria-label="Left Align">
+                        <a class="col l2 waves-effect waves-light btn margin-star brown" aria-label="Left Align">
                             <i class="material-icons">star_rate</i>
                         </a>
                     </div>
@@ -109,7 +109,7 @@
                     <div class="determinate red" style="width: 70%"></div>
                 </div>
                 <div class="progress">
-                    <div class="determinate yellow" style="width: 30%"></div>
+                    <div class="determinate brown" style="width: 30%"></div>
                 </div>
                 <div class="progress">
                     <div class="determinate green" style="width: 50%"></div>
@@ -138,12 +138,12 @@
                 {
                     <div class="row">
                         <div class="col l3">
-                            <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="img-rounded">
+                            <img src="http://dummyimage.com/60x60/666/ffffff&text=No+Image" class="cirle">
                             <div class="review-block-name">
                                 <a href="#">@item.User.UserName</a>
                             </div>
-                            <div class="review-block-date"> 
-                                @item.CreateDate<br/>1 day ago
+                            <div class="review-block-date">
+                                @item.CreateDate<br/>
                             </div>
                         </div>
                         <div class="col l9">
@@ -151,7 +151,7 @@
                                 @{ var i = 0;}
                                 @for (; i < item.Point; i++)
                                 {
-                                    <a class="col l2 waves-effect waves-light btn yellow margin-star" aria-label="Left Align">
+                                    <a class="col l2 waves-effect waves-light btn brown margin-star" aria-label="Left Align">
                                         <i class="tiny material-icons">star_rate</i>
                                     </a>
                                 }
@@ -165,7 +165,7 @@
                                 }
                             </div>
                             <div class="col l12">
-                                <div class="review-block-title">@item.Description ...</div>
+                                <h5 class="truncate">@item.Description</h5>
                                 <div class="review-block-description">@item.Description</div>
                             </div>
                         </div>
@@ -178,7 +178,7 @@
     </div>
     <div class="row" style="text-align: center;">
         <div class="col-md-12">
-            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) trên @Model.PageCount
 
             @Html.PagedListPager(Model, page => Url.Action("Details",
                 new {page}))
@@ -195,19 +195,19 @@
                             <label for="addComment" class="col-sm-2 control-label">Rating</label>
                         </div>
                         <div class="col l11">
-                            <a id="1" class="col l2 waves-effect waves-light btn yellow nice">
+                            <a id="1" class="col l2 waves-effect waves-light btn brown nice">
                                 <i id="oneStar" class="tiny material-icons">star_rate</i>
                             </a>
-                            <a id="2" class="col l2 waves-effect waves-light btn yellow nice">
+                            <a id="2" class="col l2 waves-effect waves-light btn  brown nice ">
                                 <i id="twoStar" class="tiny material-icons">star_rate</i>
                             </a>
-                            <a id="3" class="col l2 waves-effect waves-light btn yellow nice">
+                            <a id="3" class="col l2 waves-effect waves-light btn  brown nice">
                                 <i id="threeStar" class="tiny material-icons">star_rate</i>
                             </a>
-                            <a id="4" class="col l2 waves-effect waves-light btn yellow nice">
+                            <a id="4" class="col l2 waves-effect waves-light btn  brown nice">
                                 <i id="fourStar" class="tiny material-icons">star_rate</i>
                             </a>
-                            <a id="5" class="col l2 waves-effect waves-light btn yellow nice">
+                            <a id="5" class="col l2 waves-effect waves-light btn  brown nice">
                                 <i id="fiveStar" class="tiny material-icons">star_rate</i>
                             </a>
                         </div>
@@ -216,8 +216,8 @@
 
                     $(".nice").click(function() {
                         var id = $(this).attr("id");
-                        $(".nice").removeClass('yellow');
-                        $(".nice:lt(" + (   id) + ")").addClass('yellow');
+                        $(".nice").removeClass('brown');                                                
+                        $(".nice:lt(" + (id) + ")").addClass('brown');
                         $("input[name='point']").val(id);
                     });
 
@@ -226,7 +226,7 @@
                     <input type="hidden" name="productId" value="@product.Id"/>
 
                     <div class="row">
-                        <form class="col l12">
+                        
                             <div class="row">
                                 <div class="col l12">
                                     <div class="col l1">
@@ -238,12 +238,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        
                     </div>
                     
                     <div class="row">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button class="btn btn-success text-uppercase" type="submit" id="submitComment"><span class="glyphicon glyphicon-send"></span>Gửi nhận xét</button>
+                            <button class="btn btn-success text-uppercase brown" type="submit" id="submitComment"><span class="glyphicon glyphicon-send"></span>Gửi nhận xét</button>
                         </div>
                     </div>
                 }

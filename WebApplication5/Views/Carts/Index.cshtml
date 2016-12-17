@@ -15,57 +15,60 @@
             <p>
                 <label>Tìm theo tên</label>
                 @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-                <input class="" type="submit" value="Search" />
+                <input class="waves-effect waves-light btn brown" type="submit" value="Search"/>
             </p>
         }
     </div>
- 
-    <h3>Sort By:</h3>
-    @Html.ActionLink("Last Name", "Index", new {sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter})
-    /
-    @Html.ActionLink("Create Date", "Index", new {sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter})
+
+    <h3>Sắp xếp</h3>
+    @Html.ActionLink("Tên sản phẩm", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter }, new { @class = "waves-effect waves-light btn brown" })
+
+    @Html.ActionLink("Mới nhất", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter }, new { @class = "waves-effect waves-light btn brown" })
 
 
     <!-- Content Row -->
-    <div class="row">
-        <div class="col-md-12">
-            @foreach (var item in Model)
-            {
-                <div class="col-md-4">
-                    <h2>@Html.DisplayFor(modelItem => item.Name)</h2>
+    <div class="row center">
+        @foreach (var item in Model)
+        {
+            <div class="col s4" style="padding: 10px;">
+                <div class="card">
+                    <div class="card-image">
+                        <img class="responsive-img" style="height: 300px;" src="../..@Url.Content(item.ImageLink)"/>
+                        <h2 class="card-title">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="row">
+                            <p class="light col s6">Name:</p>
+                            <p class="light col s6">@Html.DisplayFor(modelItem => item.Name)</p>
+                        </div>
 
-                    <img src="../../@Html.Raw(item.ImageLink)" style="height: auto; width: 280px"/>
-                    <p>
-                        Category: @Html.DisplayFor(modelItem => item.Category.Code)
-                    </p>
-                    <p>
-                        Title: @Html.DisplayFor(modelItem => item.Document.Title)
-                    </p>
-                    <p>
-                        Description: @Html.DisplayFor(modelItem => item.Description)
-                    </p>
-                    <p>
-                        Price: @Html.DisplayFor(modelItem => item.Price)
-                    </p>
-                    <p>
-                        Origin: @Html.DisplayFor(modelItem => item.Origin)
-                    </p>
-                    <p>
-                        Added Date: @Html.DisplayFor(modelItem => item.CreateDate)
-                    </p>
-                    <a class="btn btn-default" href="#">More Info</a>
+                        <div class="row">
+                            <p class="light col s6">Title:</p>
+                            <p class="light col s6 truncate">@Html.DisplayFor(modelItem => item.Description)</p>
+                        </div>
+
+                        <div class="row">
+                            <p class="light col s6">Description:</p>
+                            <p class="light col s6 truncate">@Html.DisplayFor(modelItem => item.Description)</p>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        @Html.ActionLink("Chi tiết", "Details", "Products", new {id = item.Id}, new {@class = "waves-effect waves-light btn brown"})
+                        @Html.ActionLink("Xóa", "RemoveFromCart", "Carts", new { productId = item.Id }, new { @class = "waves-effect waves-light btn brown" })
+                    </div>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
     <br/>
     <div class="row" style="text-align: center;">
         <div class="col-md-12">
             Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
             @Html.PagedListPager(Model, page => Url.Action("Index",
                 new {page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter}))
         </div>
-    </div>    
+    </div>
 </div>
 
