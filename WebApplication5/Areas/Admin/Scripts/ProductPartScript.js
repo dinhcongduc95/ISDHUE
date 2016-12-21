@@ -2,19 +2,32 @@
     .ready(function() {
         var addedParts = new Array();
         var deleteParts = new Array();
+        // lấy product id trong hidden input ra
         var productId = $("input:hidden[name='ProductId']").attr("value");
+
+        // tạo màu đỏ cho những cái đã tích
         $(":checkbox.addPartCb").css("background", "red");
 
+        // mỗi lần click và check bõ sẽ nhảy vào đây
         $(":checkbox.addPartCb")
-            .click(function() {
+            .click(function () {
+                // nếu như chưa tích
                 if ($(this).is(":checked")) {
+                    // thêm màu đỏ
                     $(this).closest("tr").css("background", "red");
 
                 } else {
+
+                    // bỏ màu đỏ đi
                     $(this).closest("tr").removeProp("style");
                 }
+
+                // chỉnh lại dữ liệu
                 updateAddedPartArr();
             });
+
+
+
         $(":checkbox.deletePartCb")
             .click(function () {
                 if ($(this).is(":checked")) {
@@ -35,6 +48,7 @@
             .click(function () {
                 sendDeletePart();
             });
+
 
         function updateAddedPartArr() {
             addedParts = new Array();

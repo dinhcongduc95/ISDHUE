@@ -41,15 +41,18 @@ namespace WebApplication5.Models
         [DisplayName("Danh mục")]
         public int CategoryIdRef { get; set; }
 
+        // khóa phụ foreignkey lấy từ bảng Document sang
         [Required]
         [DisplayName("Tài liệu hướng dẫn")]
         public int DocumentIdRef { get; set; }
 
        
+        // khóa phụ foreignkey lấy từ bảng Category sang
         [DisplayName("Danh mục")]
         [ForeignKey("CategoryIdRef")]
         public virtual Category Category { get; set; }
 
+        // khóa phụ foreignkey lấy từ bảng Document sang
         [DisplayName("Tài liệu hướng dẫn")]
         [ForeignKey("DocumentIdRef")]
         public virtual Document Document { get; set; }
