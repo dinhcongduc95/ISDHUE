@@ -63,6 +63,7 @@ namespace WebApplication5.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                // lấy dữ liệu từ form ra chuyển đổi từ string qua int
                 var productId = int.Parse(Request.Form["ProductId"]);
 
                 part.Id = 1;
