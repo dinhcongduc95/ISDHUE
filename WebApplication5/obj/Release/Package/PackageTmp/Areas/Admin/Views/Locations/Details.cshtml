@@ -1,0 +1,46 @@
+﻿@model WebApplication5.Models.Location
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h4 class="center">Địa điểm: @Model.Name</h4>
+    <div class="row card-panel hoverable">
+
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Name)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Name)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.PostalCode)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.PostalCode)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Shippable)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Shippable)
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row card-panel hoverable center">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "waves-effect waves-light btn" })
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "waves-effect waves-light btn" })
+    </div>
+</div>
+

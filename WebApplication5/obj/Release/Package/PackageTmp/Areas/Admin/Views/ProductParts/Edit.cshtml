@@ -1,0 +1,46 @@
+﻿@model WebApplication5.Models.ProductPart
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="row card-panel hoverable">
+        <h4 class="center">ProductPart</h4>
+        
+        @Html.ValidationSummary(true, "", new { @class = "red-text" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="row">
+            @Html.LabelFor(model => model.PartIdRef, "PartIdRef", htmlAttributes: new { @class = "" })
+            <div class="col-md-10">
+                @Html.DropDownList("PartIdRef", null, htmlAttributes: new { @class = "" })
+                @Html.ValidationMessageFor(model => model.PartIdRef, "", new { @class = "red-text" })
+            </div>
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.Product_Id, "Product_Id", htmlAttributes: new { @class = "" })
+            <div class="col-md-10">
+                @Html.DropDownList("Product_Id", null, htmlAttributes: new { @class = "" })
+                @Html.ValidationMessageFor(model => model.Product_Id, "", new { @class = "red-text" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index", null, new { @class= "waves-effect waves-light btn" })
+</div>

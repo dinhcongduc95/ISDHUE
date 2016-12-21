@@ -1,0 +1,96 @@
+﻿@model WebApplication5.Models.Payment
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h4 class="center light">Chi tiết đơn hàng: @Model.Id</h4>
+
+    <div class="row card-panel hoverable">
+
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Id)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Id)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.User.Email)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.User.Email)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Product.Name)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Product.Name)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Product.Name)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Amount)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Amount)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.Currency)
+            </div>
+            <div class="col l6 center">
+                @Html.DisplayFor(model => model.Currency)
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col l6 center">
+                @Html.DisplayNameFor(model => model.IsPaid)
+            </div>
+            <div class="col l6 center">
+                @if (Model.IsPaid)
+                {
+                    @Html.Raw("<p class='green-text'>Đã Thanh Toán</p>")
+                }
+                else
+                {
+                    @Html.Raw("<p class='red-text'>Chưa Thanh Toán</p>")
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="row card-panel hoverable center">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" />
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "waves-effect waves-light btn" })
+            </div>
+        }
+    </div>
+    
+</div>

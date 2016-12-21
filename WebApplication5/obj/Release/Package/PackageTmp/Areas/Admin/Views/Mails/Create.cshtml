@@ -1,0 +1,88 @@
+﻿@model WebApplication5.Models.Mail
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <h4 class="center">Tạo bản ghi mail mới</h4>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row card-panel hoverable">
+
+            @Html.ValidationSummary(true, "", new {@class = "red-text"})
+            <div class="row">
+                <div class="col l1 offset-l2">
+                    @Html.LabelFor(model => model.UserIdRef)
+                </div>
+                <div class="col l7">
+                    @Html.DropDownList("UserIdRef", null, new {@class = ""})
+                    @Html.ValidationMessageFor(model => model.UserIdRef, "", new {@class = "red-text"})
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col l1 offset-l2">
+                    @Html.LabelFor(model => model.Title, new {@class = ""})
+                </div>
+                <div class="col l7">
+                    @Html.EditorFor(model => model.Title, new {htmlAttributes = new {@class = ""}})
+                    @Html.ValidationMessageFor(model => model.Title, "", new {@class = "red-text"})
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col l1 offset-l2">
+                    @Html.LabelFor(model => model.Description, new {@class = ""})
+                </div>
+                <div class="col l7">
+                    @Html.EditorFor(model => model.Description, new {htmlAttributes = new {@class = ""}})
+                    @Html.ValidationMessageFor(model => model.Description, "", new {@class = "red-text"})
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col l1 offset-l2">
+                    @Html.LabelFor(model => model.MailContent, new {@class = ""})
+                </div>
+                <div class="col l7">
+                    @Html.EditorFor(model => model.MailContent, new {htmlAttributes = new {@class = ""}})
+                    @Html.ValidationMessageFor(model => model.MailContent, "", new {@class = "red-text"})
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col l1 offset-l2">
+                    @Html.LabelFor(model => model.CreateDate, new {@class = ""})
+                </div>
+                <div class="col l7">
+                    @Html.EditorFor(model => model.CreateDate, new {htmlAttributes = new {@class = ""}})
+                    @Html.ValidationMessageFor(model => model.CreateDate, "", new {@class = "red-text"})
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col l1 offset-l2">
+                    @Html.LabelFor(model => model.IsSent, new {@class = ""})
+                </div>
+                <div class="col l7">
+                    <input type="checkbox" id="IsSent" value="true" name="IsPaid" />
+                    <label for="IsSent">Đã gửi</label>
+                    @Html.ValidationMessageFor(model => model.IsSent, "", new {@class = "red-text"})
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row card-panel hoverable center">
+            <input type="submit" value="Create" class="btn btn-default"/>
+            @Html.ActionLink("Back to List", "Index", null, new {@class = "waves-effect waves-light btn"})
+        </div>
+    }
+
+</div>
+

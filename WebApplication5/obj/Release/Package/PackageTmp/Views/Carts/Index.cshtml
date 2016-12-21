@@ -1,0 +1,74 @@
+﻿@model PagedList.IPagedList<WebApplication5.Models.Product>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css"/>
+
+@{
+    ViewBag.Title = "Index";
+}
+<!-- Page Content -->
+<div class="container">
+
+    <h2 class="light center">Giỏ hàng của bạn</h2>
+    <div class="center">
+        @using (Html.BeginForm("Index", "UserProducts", FormMethod.Get))
+        {
+            <p>
+                <label>Tìm theo tên</label>
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                <input class="waves-effect waves-light btn brown" type="submit" value="Search"/>
+            </p>
+        }
+    </div>
+
+    <h3>Sắp xếp</h3>
+    @Html.ActionLink("Tên sản phẩm", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter }, new { @class = "waves-effect waves-light btn brown" })
+
+    @Html.ActionLink("Mới nhất", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter }, new { @class = "waves-effect waves-light btn brown" })
+
+
+    <!-- Content Row -->
+    <div class="row center">
+        @foreach (var item in Model)
+        {
+            <div class="col s4" style="padding: 10px;">
+                <div class="card">
+                    <div class="card-image">
+                        <img class="responsive-img" style="height: 300px;" src="../..@Url.Content(item.ImageLink)"/>
+                        <h2 class="card-title">
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </h2>
+                    </div>
+                    <div class="card-content">
+                        <div class="row">
+                            <p class="light col s6">Name:</p>
+                            <p class="light col s6">@Html.DisplayFor(modelItem => item.Name)</p>
+                        </div>
+
+                        <div class="row">
+                            <p class="light col s6">Title:</p>
+                            <p class="light col s6 truncate">@Html.DisplayFor(modelItem => item.Description)</p>
+                        </div>
+
+                        <div class="row">
+                            <p class="light col s6">Description:</p>
+                            <p class="light col s6 truncate">@Html.DisplayFor(modelItem => item.Description)</p>
+                        </div>
+                    </div>
+                    <div class="card-action">
+                        @Html.ActionLink("Chi tiết", "Details", "Products", new {id = item.Id}, new {@class = "waves-effect waves-light btn brown"})
+                        @Html.ActionLink("Xóa", "RemoveFromCart", "Carts", new { productId = item.Id }, new { @class = "waves-effect waves-light btn brown" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <br/>
+    <div class="row" style="text-align: center;">
+        <div class="col-md-12">
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+                new {page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter}))
+        </div>
+    </div>
+</div>
+

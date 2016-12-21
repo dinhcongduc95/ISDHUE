@@ -1,0 +1,49 @@
+﻿@model WebApplication5.Models.Document
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <h4 class="center light">Chỉnh sửa tài liệu: @Model.Title</h4>
+        <div class="row card-panel hoverable">
+            
+
+            @Html.ValidationSummary(true, "", new {@class = "red-text"})
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="row">
+                <div class="col l1 offset-l2">
+                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "" })
+                </div>                
+                <div class="col l7">
+                    @Html.EditorFor(model => model.Title, new {htmlAttributes = new {@class = ""}})
+                    @Html.ValidationMessageFor(model => model.Title, "", new {@class = "red-text"})
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col l1 offset-l2">
+                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "" })
+                </div>
+                <div class="col l7">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "red-text" })
+                </div>
+            </div>           
+                        
+        </div>
+
+        <div class="row card-panel hoverable center">
+            <input type="submit" value="Save" class="btn btn-default" />
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "waves-effect waves-light btn" })
+        </div>
+    }
+
+    
+</div>
+

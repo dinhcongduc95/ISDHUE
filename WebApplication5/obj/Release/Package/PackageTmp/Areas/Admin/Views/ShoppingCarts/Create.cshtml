@@ -1,0 +1,46 @@
+﻿@model WebApplication5.Models.ShoppingCart
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h4 class="center light">Tạo giỏ hàng mới</h4>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="row card-panel hoverable">
+
+
+            @Html.ValidationSummary(true, "", new {@class = "red-text"})
+            <div class="row">
+                <div class="col l1 offset-l2">
+                    @Html.LabelFor(model => model.UserIdRef)
+                </div>                
+                <div class="col l7">
+                    @Html.DropDownList("UserIdRef", null, htmlAttributes: new {@class = ""})
+                    @Html.ValidationMessageFor(model => model.UserIdRef, "", new {@class = "red-text"})
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col l1 offset-l2">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "" })
+                </div>
+                <div class="col l7">
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "" } })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "red-text" })
+                </div>
+            </div>
+                           
+        </div>
+
+        <div class="row card-panel hoverable center">
+            <input type="submit" value="Create" class="btn btn-default" />
+            @Html.ActionLink("Back to List", "Index", null, new {@class = "waves-effect waves-light btn"})
+    
+        </div>
+    }
+</div>
